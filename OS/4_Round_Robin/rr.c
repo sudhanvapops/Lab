@@ -23,10 +23,12 @@ int main() {
 
     int at[n], bt[n], rt[n], wt[n], tat[n];
 
-    for (int i = 0; i < n; i++) {
-        printf("Enter Arrival Time & Burst Time for P%d: ", i + 1);
+    // Input
+    for(int i = 0; i < n; i++) {
+        printf("Enter Arrival Time & Burst Time of P%d: ", i+1);
         scanf("%d %d", &at[i], &bt[i]);
         rt[i] = bt[i];
+        wt[i] = tat[i] = 0;
     }
 
     printf("Enter Time Quantum: ");
@@ -34,22 +36,18 @@ int main() {
 
     int time = 0, completed = 0;
 
-    while (completed < n) {
+    // Round Robin Loop
+    while(completed < n) {
 
-        int idle = 1;  // assume CPU idle
+        for(int i = 0; i < n; i++) {
 
-        for (int i = 0; i < n; i++) {
+            // process has arrived + still running
+            if(at[i] <= time && rt[i] > 0) {
 
-            // If process has arrived and not finished
-            if (at[i] <= time && rt[i] > 0) {
-
-                idle = 0;  // CPU did work
-
-                if (rt[i] > tq) {
+                if(rt[i] > tq) {
                     time += tq;
                     rt[i] -= tq;
-                } 
-                else {
+                } else {
                     time += rt[i];
                     rt[i] = 0;
                     completed++;
@@ -59,23 +57,20 @@ int main() {
                 }
             }
         }
-
-        // If no process ran → CPU idle
-        if (idle)
-            time++;
     }
 
-    printf("\nProcess\tAT\tBT\tWT\tTAT\n");
-    float sumWT = 0, sumTAT = 0;
+    // Output
+    printf("\nP\tAT\tBT\tWT\tTAT\n");
+    float avgWT = 0, avgTAT = 0;
 
-    for (int i = 0; i < n; i++) {
+    for(int i = 0; i < n; i++) {
         printf("P%d\t%d\t%d\t%d\t%d\n", i+1, at[i], bt[i], wt[i], tat[i]);
-        sumWT += wt[i];
-        sumTAT += tat[i];
+        avgWT += wt[i];
+        avgTAT += tat[i];
     }
 
-    printf("\nAverage Waiting Time = %.2f", sumWT / n);
-    printf("\nAverage Turnaround Time = %.2f\n", sumTAT / n);
+    printf("\nAverage Waiting Time = %.2f", avgWT / n);
+    printf("\nAverage Turnaround Time = %.2f\n", avgTAT / n);
 
     return 0;
 }
