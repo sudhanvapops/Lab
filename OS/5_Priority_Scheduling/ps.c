@@ -38,7 +38,8 @@ int main() {
             if (p[i].pr > p[j].pr) { t = p[i]; p[i] = p[j]; p[j] = t; }
 
     // Calculate WT & TAT
-    p[0].wt = 0; p[0].tat = p[0].bt;
+    p[0].wt = 0; 
+    p[0].tat = p[0].bt;
     for (int i = 1; i < n; i++) {
         p[i].wt = p[i - 1].wt + p[i - 1].bt;
         p[i].tat = p[i].wt + p[i].bt;
