@@ -1,0 +1,11 @@
+iverilog -o output input.v
+vvp otput
+gtkwave otput.vcd
+
+
+insert 
+
+initail begin
+    $dumpfile("output.vcd");
+    $dumpvars(0, testbench_func);
+end
