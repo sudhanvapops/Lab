@@ -8,7 +8,7 @@ module Mux8to1(d0,d1,d2,d3,d4,d5,d6,d7,Sel,Out);
         case(Sel)
             3'b000: Out = d0;
             3'b001: Out = d1;
-            3'b002: Out = d2;
+            3'b010: Out = d2;
             3'b011: Out = d3;
             3'b100: Out = d4;
             3'b101: Out = d5;
