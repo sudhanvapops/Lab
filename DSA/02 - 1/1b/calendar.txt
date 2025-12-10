@@ -1,0 +1,14 @@
+1
+Gym
+2
+Sport
+3
+Game Night
+4
+relax
+5
+drawing
+6
+Movie
+7
+Relax
