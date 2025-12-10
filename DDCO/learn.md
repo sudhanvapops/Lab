@@ -1,0 +1,1 @@
+Basic: https://chatgpt.com/c/693665e9-44c4-8321-b062-7c8cf35847f9

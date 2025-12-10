@@ -1,0 +1,29 @@
+iverilog -o output input.v
+vvp otput
+gtkwave otput.vcd
+
+
+insert 
+
+initail begin
+    $dumpfile("output.vcd");
+    $dumpvars(0, testbench_func);
+end
+
+
+
+colage name 
+department
+ddco pedogogy activiyt  
+
+8 programs questionns list
+
+instruction how to solve
+pik any progrm and run it any compiler 
+
+make a gropup 4 members
+dipolmoa 1 compolasry
+
+3 weeks  dec19 
+submit report and execution of progam on or before
+

@@ -1,0 +1,59 @@
+$date
+	Sat Oct 18 01:44:25 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module TB_FA $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " cout $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$scope module fl $end
+$var wire 4 & A [3:0] $end
+$var wire 4 ' B [3:0] $end
+$var wire 1 % Cin $end
+$var wire 4 ( Sum [3:0] $end
+$var wire 1 " Cout $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 (
+b1 '
+b0 &
+0%
+b1 $
+b0 #
+0"
+b1 !
+$end
+#10
+b110 !
+b110 (
+b11 $
+b11 '
+b11 #
+b11 &
+#20
+b1010 !
+b1010 (
+1"
+b1011 $
+b1011 '
+b1111 #
+b1111 &
+#30
+b100 !
+b100 (
+0"
+b1 $
+b1 '
+b11 #
+b11 &
+#40
