@@ -1,0 +1,17 @@
+# Ignore compiled binaries everywhere
+*.exe
+*.o
+*.out
+
+# Optional extras (safe for C/C++ projects)
+*.obj
+*.dll
+*.so
+*.a
+*.lo
+*.la
+
+# Ignore build folders
+/build/
+/bin/
+/dist/
