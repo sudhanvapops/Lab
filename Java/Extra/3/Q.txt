@@ -1,0 +1,4 @@
+Write a java program to display 
+name, usn, semister, and branch of a student
+initialize the values using constructor
+make use of this keyword to overcome local variable hiding global variable
