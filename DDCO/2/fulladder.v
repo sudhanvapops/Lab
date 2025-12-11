@@ -1,3 +1,5 @@
+// Design a 4 bit full adder and subtractor and simulate the same using basic gates. 
+
 // 4-bit Full Adder Module
 module fulladder_4bit (
     input  [3:0] A, B,
@@ -10,6 +12,10 @@ endmodule
 
 // Testbench
 module TB_FA();
+    // Defines a Vector
+    // It starts at bit 3
+    // Ends at bit 0
+    // Total width = 4 bits
     reg  [3:0] a, b;
     reg        cin;
     wire [3:0] sum;

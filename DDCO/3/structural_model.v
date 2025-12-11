@@ -1,3 +1,6 @@
+// Design Verilog HDL to implement simple circuits using structural, Data 
+// flow and Behavioural model.
+
 // Structural Modeling
 module structural(A, B, C, D, E);
     input A, B, C, D;

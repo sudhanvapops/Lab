@@ -25,7 +25,7 @@ module D_FF_TB();
     end
 
     initial begin
-        RST = 1; #10;
+        RST = 1; #10; // makes Q = 0 and start from here
         RST = 0; #10;
 
         D = 0; #20;

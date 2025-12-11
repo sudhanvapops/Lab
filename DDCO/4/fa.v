@@ -1,3 +1,6 @@
+// Design Verilog  HDL  to  implement  Binary  Adder-Subtractor  –  Half  and  Full 
+// Adder,  Half  and  Full Subtractor.
+
 module fulladder(A, B, C, sum, cout);
     input A, B, C;
     output sum, cout;
