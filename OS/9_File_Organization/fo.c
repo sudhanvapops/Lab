@@ -1,61 +1,14 @@
-// sample input/output
-// --- Single Level Directory Simulation ---
-
-// 1. Create File
-// 2. Delete File
-// 3. Search File
-// 4. Display Files
-// 5. Exit
-// Enter your choice: 1
-// Enter file name to create: a.txt
-// File created successfully!
-
-// Enter your choice: 1
-// Enter file name to create: b.txt
-// File created successfully!
-
-// Enter your choice: 4
-// Files in Directory:
-// a.txt
-// b.txt
-
-
-// --- Two Level Directory Simulation ---
-
-// 1. Create Directory
-// 2. Create File
-// 3. Search File
-// 4. Display
-// 5. Exit
-// Enter your choice: 1
-// Enter directory name: user1
-// Directory created successfully!
-
-// Enter your choice: 2
-// Enter directory name: user1
-// Enter file name to create: test.txt
-// File created in directory user1
-
-// Enter your choice: 4
-// Directory Structure:
-
-// Directory: user1
-//   test.txt
-
-
 #include <stdio.h>
 #include <string.h>
 
 struct File { char name[20]; };
-struct Directory {
+struct Dir {
     char name[20];
     struct File files[10];
     int fileCount;
 };
 
-// ----------------------------------
-// COMMON UTILITY FUNCTIONS
-// ----------------------------------
+
 void printFiles(struct File files[], int count) {
     for (int i = 0; i < count; i++)
         printf("%s\n", files[i].name);
@@ -74,9 +27,6 @@ void deleteFile(struct File files[], int *count, char fname[]) {
     printf("File not found!\n");
 }
 
-// ----------------------------------
-// SINGLE LEVEL DIRECTORY FUNCTIONS
-// ----------------------------------
 void createSingleFile(struct File files[], int *count) {
     printf("Enter file name to create: ");
     scanf("%s", files[(*count)++].name);
@@ -97,7 +47,7 @@ void searchSingleFile(struct File files[], int count) {
     printf("File not found!\n");
 }
 
-void singleLevelDirectory() {
+void singleLvlDir() {
     struct File files[10];
     int fileCount = 0, ch;
 
@@ -126,10 +76,8 @@ void singleLevelDirectory() {
     } while (ch != 5);
 }
 
-// ----------------------------------
-// TWO LEVEL DIRECTORY FUNCTIONS
-// ----------------------------------
-void createDirectory(struct Directory dirs[], int *dirCount) {
+
+void createDirectory(struct Dir dirs[], int *dirCount) {
     printf("Enter directory name: ");
     scanf("%s", dirs[*dirCount].name);
     dirs[*dirCount].fileCount = 0;
@@ -137,7 +85,7 @@ void createDirectory(struct Directory dirs[], int *dirCount) {
     printf("Directory created successfully!\n");
 }
 
-void createFileTwoLevel(struct Directory dirs[], int dirCount) {
+void createFileTwoLevel(struct Dir dirs[], int dirCount) {
     char dname[20];
     printf("Enter directory name: ");
     scanf("%s", dname);
@@ -154,7 +102,7 @@ void createFileTwoLevel(struct Directory dirs[], int dirCount) {
     printf("Directory not found!\n");
 }
 
-void searchFileTwoLevel(struct Directory dirs[], int dirCount) {
+void searchFileTwoLevel(struct Dir dirs[], int dirCount) {
     char fname[20];
     printf("Enter file name to search: ");
     scanf("%s", fname);
@@ -167,7 +115,7 @@ void searchFileTwoLevel(struct Directory dirs[], int dirCount) {
             }
 }
 
-void displayTwoLevel(struct Directory dirs[], int dirCount) {
+void displayTwoLevel(struct Dir dirs[], int dirCount) {
     printf("\nDirectory Structure:\n");
     for (int i = 0; i < dirCount; i++) {
         printf("\nDirectory: %s\n", dirs[i].name);
@@ -175,8 +123,8 @@ void displayTwoLevel(struct Directory dirs[], int dirCount) {
     }
 }
 
-void twoLevelDirectory() {
-    struct Directory dirs[5];
+void twoLvlDir() {
+    struct Dir dirs[5];
     int dirCount = 0, ch;
 
     printf("\n--- Two Level Directory Simulation ---\n");
@@ -196,18 +144,15 @@ void twoLevelDirectory() {
     } while (ch != 5);
 }
 
-// ----------------------------------
-// MAIN MENU
-// ----------------------------------
-
 int main() {
     int choice;
 
-    printf("1. Single Level Directory\n2. Two Level Directory\nEnter your choice: ");
+    printf("1. Single Level Directory\n"
+        "2. Two Level Directory\nEnter your choice: ");
     scanf("%d", &choice);
 
-    if (choice == 1) singleLevelDirectory();
-    else if (choice == 2) twoLevelDirectory();
+    if (choice == 1) singleLvlDir();
+    else if (choice == 2) twoLvlDir();
     else printf("Invalid choice!\n");
 
     return 0;

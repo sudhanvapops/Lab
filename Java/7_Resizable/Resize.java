@@ -1,6 +1,6 @@
 interface Resizeable {
     void resizeHeight(int height);
-    void resizeWidth(int height);
+    void resizeWidth(int width);
 }
 
 class Rectangle implements Resizeable {

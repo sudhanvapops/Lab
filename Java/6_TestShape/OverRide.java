@@ -4,7 +4,7 @@ abstract class Shape{
 }
 
 
-class Triangle extends Shape{
+class Triangle extends Shape {
 
     private double s1,s2,s3;
 
@@ -28,7 +28,7 @@ class Triangle extends Shape{
 }
 
 
-class Circle extends Shape{
+class Circle extends Shape {
 
     private double r;
 

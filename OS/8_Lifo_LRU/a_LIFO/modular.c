@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-// ------------------------
-// Print Frames (Common)
-// ------------------------
 void printFrames(int frame[], int f, int page) {
     printf("Page %d -> ", page);
     for (int i = 0; i < f; i++)
@@ -11,9 +8,6 @@ void printFrames(int frame[], int f, int page) {
     printf("\n");
 }
 
-// ------------------------
-// FIFO Algorithm
-// ------------------------
 int runFIFO(int pages[], int n, int frame[], int f) {
     int pageFaults = 0, index = 0;
 
@@ -39,38 +33,49 @@ int runFIFO(int pages[], int n, int frame[], int f) {
     return pageFaults;
 }
 
-// ------------------------
-// LRU Algorithm
-// ------------------------
 int runLRU(int pages[], int n, int frame[], int f) {
-    int pageFaults = 0, temp[10], count = 0;
+    int pageFaults = 0;
+    int temp[10];
+
+    // initialize temp
+    for (int i = 0; i < f; i++)
+        temp[i] = -1;
 
     printf("\nLRU Page Replacement\n");
+
     for (int i = 0; i < n; i++) {
         int hit = 0;
 
-        // Check if page exists
-        for (int j = 0; j < f; j++)
+        // check hit
+        for (int j = 0; j < f; j++) {
             if (frame[j] == pages[i]) {
-                temp[j] = i;
                 hit = 1;
+                temp[j] = i;
+                break;
             }
+        }
 
-        // Page Fault
         if (!hit) {
-            if (count < f) { // Empty frame available
-                frame[count] = pages[i];
-                temp[count] = i;
-                count++;
-            } else { // Replace LRU page
-                int least = 0;
-                for (int j = 1; j < f; j++)
-                    if (temp[j] < temp[least])
-                        least = j;
+            int replaceIndex = -1;
 
-                frame[least] = pages[i];
-                temp[least] = i;
+            // empty frame?
+            for (int j = 0; j < f; j++) {
+                if (frame[j] == -1) {
+                    replaceIndex = j;
+                    break;
+                }
             }
+
+            // if no empty frame, find LRU
+            if (replaceIndex == -1) {
+                replaceIndex = 0;
+                for (int j = 1; j < f; j++)
+                    if (temp[j] < temp[replaceIndex])
+                        replaceIndex = j;
+            }
+
+            frame[replaceIndex] = pages[i];
+            temp[replaceIndex] = i;
             pageFaults++;
         }
 
@@ -80,24 +85,21 @@ int runLRU(int pages[], int n, int frame[], int f) {
     return pageFaults;
 }
 
-// ------------------------
-// MAIN FUNCTION
-// ------------------------
 int main() {
     int pages[30], frame[10];
     int n, f, choice;
 
     printf("Enter number of pages: ");
-    scanf("%d", &n);
+    scanf(" %d", &n);
 
     printf("Enter page numbers: ");
-    for (int i = 0; i < n; i++) scanf("%d", &pages[i]);
+    for (int i = 0; i < n; i++) scanf(" %d", &pages[i]);
 
     printf("Enter number of frames: ");
-    scanf("%d", &f);
+    scanf(" %d", &f);
 
     printf("\n1. FIFO\n2. LRU\nEnter your choice: ");
-    scanf("%d", &choice);
+    scanf(" %d", &choice);
 
     // Initialize frames to empty
     for (int i = 0; i < f; i++) frame[i] = -1;

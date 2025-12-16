@@ -1,6 +1,3 @@
-// If I don’t build now, I will be stuck repeating tutorials forever — and that’s a life I refuse to live. and thats where i trualy cannot go forward to next tutorail
-// https://chatgpt.com/c/68d8d432-f2b0-8324-9b85-069e60c577e6
-
 import java.util.Scanner;
 
 public class MatrixAddition {

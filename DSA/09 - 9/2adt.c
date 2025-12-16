@@ -3,251 +3,243 @@
 #include <math.h>
 
 struct node {
-    int coeff, powX, powY, powZ;
+    int coeff, expo;
     struct node *ptr;
 };
 
 struct node *list1 = NULL, *list2 = NULL, *list3 = NULL;
-struct node *head1, *head2, *head3;
-struct node *dummy1, *dummy2;
+struct node *head1 = NULL, *head2 = NULL, *head3 = NULL;
+struct node *dummy1 = NULL, *dummy2 = NULL, *dummy3 = NULL;
 
-// DRY: Single function to create polynomial for any list
-void create_poly(struct node **list, struct node **head, struct node **dummy, int c, int px, int py, int pz) {
-    *dummy = (struct node*)malloc(sizeof(struct node));
-    (*dummy)->coeff = (*dummy)->powX = (*dummy)->powY = (*dummy)->powZ = 0;
-    (*dummy)->ptr = *list;
+// Initialize dummy node if it doesn't exist
+void init_dummy(struct node **dummy) {
+    if (*dummy == NULL) {
+        *dummy = (struct node*)malloc(sizeof(struct node));
+        (*dummy)->coeff = 0;
+        (*dummy)->expo = 0;
+        (*dummy)->ptr = *dummy;
+    }
+}
+
+// Add a term to polynomial
+void add_term(struct node **list, struct node **head, struct node **dummy, int c, int e) {
+    init_dummy(dummy);
     
+    struct node *temp = (struct node*)malloc(sizeof(struct node));
+    temp->coeff = c;
+    temp->expo = e;
+    temp->ptr = *dummy;
+
     if (*list == NULL) {
-        *list = (struct node*)malloc(sizeof(struct node));
-        (*list)->coeff = c;
-        (*list)->powX = px;
-        (*list)->powY = py;
-        (*list)->powZ = pz;
-        (*list)->ptr = *list;
-        *head = *list;
-        (*head)->ptr = *dummy;
+        *list = *head = temp;
+        (*dummy)->ptr = temp;
     } else {
-        struct node *temp = (struct node*)malloc(sizeof(struct node));
-        temp->coeff = c;
-        temp->powX = px;
-        temp->powY = py;
-        temp->powZ = pz;
         (*head)->ptr = temp;
-        temp->ptr = *dummy;
         *head = temp;
     }
 }
 
+// Create polynomial by reading user input
+void create_poly(struct node **list, struct node **head, struct node **dummy) {
+    int n, c, e;
+
+    scanf("%d", &n);
+    printf("Enter coefficient and exponent for each term:\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("  Term %d: ", i + 1);
+        scanf("%d %d", &c, &e);
+        add_term(list, head, dummy, c, e);
+    }
+}
+
+// Add two polynomials
 void add_poly() {
-    struct node *temp1 = list1, *temp2 = list2, *temp;
-    list3 = NULL;
-    head3 = NULL;
+    init_dummy(&dummy3);
+    list3 = head3 = NULL;
     
+    struct node *temp1 = list1, *temp2 = list2;
+
     while (temp1 != dummy1 && temp2 != dummy2) {
-        temp = (struct node*)malloc(sizeof(struct node));
-        
-        // Check if terms have same powers (like terms)
-        int same = (temp1->powX == temp2->powX && 
-                   temp1->powY == temp2->powY && 
-                   temp1->powZ == temp2->powZ);
-        
-        if (same) {
-            // Add coefficients for like terms
-            temp->coeff = temp1->coeff + temp2->coeff;
-            temp->powX = temp1->powX;
-            temp->powY = temp1->powY;
-            temp->powZ = temp1->powZ;
+        int c, e;
+        if (temp1->expo == temp2->expo) {
+            c = temp1->coeff + temp2->coeff;
+            e = temp1->expo;
             temp1 = temp1->ptr;
             temp2 = temp2->ptr;
+        } else if (temp1->expo > temp2->expo) {
+            c = temp1->coeff;
+            e = temp1->expo;
+            temp1 = temp1->ptr;
         } else {
-            // Compare which term comes first (higher powers first)
-            int cmp = (temp1->powX != temp2->powX) ? (temp1->powX - temp2->powX) :
-                      (temp1->powY != temp2->powY) ? (temp1->powY - temp2->powY) :
-                      (temp1->powZ - temp2->powZ);
-            
-            if (cmp > 0) {
-                temp->coeff = temp1->coeff;
-                temp->powX = temp1->powX;
-                temp->powY = temp1->powY;
-                temp->powZ = temp1->powZ;
-                temp1 = temp1->ptr;
-            } else {
-                temp->coeff = temp2->coeff;
-                temp->powX = temp2->powX;
-                temp->powY = temp2->powY;
-                temp->powZ = temp2->powZ;
-                temp2 = temp2->ptr;
-            }
+            c = temp2->coeff;
+            e = temp2->expo;
+            temp2 = temp2->ptr;
         }
-        
-        // Skip zero coefficients
-        if (temp->coeff == 0) {
-            free(temp);
-            continue;
-        }
-        
-        if (list3 == NULL) {
-            list3 = temp;
-            temp->ptr = list3; // Circular
-            head3 = temp;
-        } else {
-            head3->ptr = temp;
-            temp->ptr = list3; // Circular
-            head3 = temp;
+        if (c != 0) {
+            add_term(&list3, &head3, &dummy3, c, e);
         }
     }
-    
-    // Handle remaining terms from poly1
+
+    // Add remaining terms from polynomial 1
     while (temp1 != dummy1) {
-        temp = (struct node*)malloc(sizeof(struct node));
-        temp->coeff = temp1->coeff;
-        temp->powX = temp1->powX;
-        temp->powY = temp1->powY;
-        temp->powZ = temp1->powZ;
-        
-        if (list3 == NULL) {
-            list3 = temp;
-            temp->ptr = list3;
-            head3 = temp;
-        } else {
-            head3->ptr = temp;
-            temp->ptr = list3;
-            head3 = temp;
-        }
+        add_term(&list3, &head3, &dummy3, temp1->coeff, temp1->expo);
         temp1 = temp1->ptr;
     }
     
-    // Handle remaining terms from poly2
+    // Add remaining terms from polynomial 2
     while (temp2 != dummy2) {
-        temp = (struct node*)malloc(sizeof(struct node));
-        temp->coeff = temp2->coeff;
-        temp->powX = temp2->powX;
-        temp->powY = temp2->powY;
-        temp->powZ = temp2->powZ;
-        
-        if (list3 == NULL) {
-            list3 = temp;
-            temp->ptr = list3;
-            head3 = temp;
-        } else {
-            head3->ptr = temp;
-            temp->ptr = list3;
-            head3 = temp;
-        }
+        add_term(&list3, &head3, &dummy3, temp2->coeff, temp2->expo);
         temp2 = temp2->ptr;
     }
 }
 
-// DRY: Single display function
-void display_list(struct node *list, struct node *dummy, const char *name) {
-    printf("%s: ", name);
-    struct node *temp = list;
-    if (temp == NULL) {
-        printf("Not created");
+// Display polynomial in a nice format
+void display_poly(struct node *list, struct node *dummy) {
+    if (list == NULL || list == dummy) {
+        printf("0\n");
         return;
     }
     
-    while (temp->ptr != list) {
-        if (temp != list && temp->coeff > 0) printf("+");
-        printf("%d", temp->coeff);
-        if (temp->powX) printf("X^%d", temp->powX);
-        if (temp->powY) printf("Y^%d", temp->powY);
-        if (temp->powZ) printf("Z^%d", temp->powZ);
+    struct node *temp = list;
+    int is_first = 1;
+
+    while (temp != dummy) {
+        // Skip terms with zero coefficient
+        if (temp->coeff == 0) {
+            temp = temp->ptr;
+            continue;
+        }
+        
+        // Print sign and coefficient
+        if (!is_first) {
+            if (temp->coeff > 0) {
+                printf(" + ");
+            } else {
+                printf(" - ");
+            }
+        } else if (temp->coeff < 0) {
+            printf("-");
+        }
+        
+        int abs_coeff = abs(temp->coeff);
+        
+        // Handle different exponent cases
+        if (temp->expo == 0) {
+            // Constant term
+            printf("%d", abs_coeff);
+        } else if (temp->expo == 1) {
+            // Linear term
+            if (abs_coeff == 1) {
+                printf("x");
+            } else {
+                printf("%dx", abs_coeff);
+            }
+        } else {
+            // Higher order terms
+            if (abs_coeff == 1) {
+                printf("x^%d", temp->expo);
+            } else {
+                printf("%dx^%d", abs_coeff, temp->expo);
+            }
+        }
+        
         temp = temp->ptr;
+        is_first = 0;
     }
-    // Print last node
-    if (temp->coeff > 0 && temp != list) printf("+");
-    printf("%d", temp->coeff);
-    if (temp->powX) printf("X^%d", temp->powX);
-    if (temp->powY) printf("Y^%d", temp->powY);
-    if (temp->powZ) printf("Z^%d", temp->powZ);
-}
-
-void display() {
-    printf("\n");
-    display_list(list1, dummy1, "POLYNOMIAL 1");
-    printf("\n");
-    display_list(list2, dummy2, "POLYNOMIAL 2");
-    printf("\n");
-    display_list(list3, NULL, "SUM OF POLYNOMIALS");
     printf("\n");
 }
 
-// DRY: Single evaluation function
-int eval_list(struct node *list, struct node *dummy, int x, int y, int z) {
+// Evaluate polynomial at given x value
+int eval_poly(struct node *list, struct node *dummy, int x) {
+    if (list == NULL || dummy == NULL) return 0;
+    
     int result = 0;
     struct node *temp = list;
+    
     while (temp != dummy) {
-        result += temp->coeff * pow(x, temp->powX) * pow(y, temp->powY) * pow(z, temp->powZ);
+        result += temp->coeff * pow(x, temp->expo);
         temp = temp->ptr;
     }
+    
     return result;
 }
 
-void eval_poly(int x, int y, int z) {
-    printf("Polynomial 1 Evaluation: %d\n", eval_list(list1, dummy1, x, y, z));
-    printf("Polynomial 2 Evaluation: %d\n", eval_list(list2, dummy2, x, y, z));
+// Print a separator line
+void print_separator() {
+    printf("----------------------\n");
 }
 
 int main() {
-    int ch, n, c, px, py, pz, x, y, z;
-    
-    printf("1.Create first polynomial\n2.Create second polynomial\n");
-    printf("3.Display polynomials\n4.Add polynomials\n");
-    printf("5.Evaluate polynomial\n6.Exit\n");
-    
+    int ch, x;
+
+    // Display menu header
+    print_separator();
+    printf("         POLYNOMIAL OPERATIONS PROGRAM\n");
+    print_separator();
+    printf("\n");
+    printf("  1. Add Two Polynomials\n");
+    printf("  2. Evaluate a Polynomial\n");
+    printf("  3. Exit\n");
+    printf("\n");
+    print_separator();
+
     while (1) {
-        printf("\nEnter choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
-        
+
         switch (ch) {
-            case 1:
-            case 2:
-                printf("Enter the number of terms: ");
-                scanf("%d", &n);
-                printf("Enter coefficient & powers (coeff powX powY powZ) for each term:\n");
-                for (int i = 0; i < n; i++) {
-                    scanf("%d %d %d %d", &c, &px, &py, &pz);
-                    if (ch == 1)
-                        create_poly(&list1, &head1, &dummy1, c, px, py, pz);
-                    else
-                        create_poly(&list2, &head2, &dummy2, c, px, py, pz);
-                }
-                printf("Polynomial %d created successfully!\n", ch);
-                break;
-                
-            case 3:
-                display();
-                break;
-                
-            case 4:
-                if (list1 && list2) {
-                    add_poly();
-                    printf("Addition completed!\n");
-                    printf("RESULT:\n");
-                    display_list(list3, NULL, "");
-                    printf("\n");
-                } else {
-                    printf("Create both polynomials first!\n");
-                }
-                break;
-                
-            case 5:
-                if (list1) {
-                    printf("Enter values for x, y, z: ");
-                    scanf("%d %d %d", &x, &y, &z);
-                    eval_poly(x, y, z);
-                } else {
-                    printf("Create polynomial first!\n");
-                }
-                break;
-                
-            case 6:
-                exit(0);
-                
-            default:
-                printf("Invalid choice!\n");
+        case 1:
+            printf("\n--- POLYNOMIAL ADDITION ---\n\n");
+            
+            // First polynomial
+            printf("Enter number of terms for Polynomial 1: ");
+            create_poly(&list1, &head1, &dummy1);
+            printf("\nPolynomial 1: ");
+            display_poly(list1, dummy1);
+
+            // Second polynomial
+            printf("\nEnter number of terms for Polynomial 2: ");
+            create_poly(&list2, &head2, &dummy2);
+            printf("\nPolynomial 2: ");
+            display_poly(list2, dummy2);
+
+            // Add and display result
+            add_poly();
+            printf("\n");
+            print_separator();
+            printf("Result: ");
+            display_poly(list3, dummy3);
+            print_separator();
+            break;
+
+        case 2:
+            printf("\n--- POLYNOMIAL EVALUATION ---\n\n");
+            
+            printf("Enter number of terms: ");
+            create_poly(&list1, &head1, &dummy1);
+            
+            printf("\nPolynomial: ");
+            display_poly(list1, dummy1);
+
+            printf("\nEnter value of x: ");
+            scanf("%d", &x);
+
+            int result = eval_poly(list1, dummy1, x);
+            printf("\n");
+            print_separator();
+            printf("P(%d) = %d\n", x, result);
+            print_separator();
+            break;
+
+        case 3:
+            printf("\nExiting program. Goodbye!\n");
+            exit(0);
+
+        default:
+            printf("\nInvalid choice! Please enter 1, 2, or 3.\n");
         }
     }
+
     return 0;
 }

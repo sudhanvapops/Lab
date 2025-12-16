@@ -19,10 +19,7 @@ class MyPoint {
     }
 
     public int[] getXY() {
-        int[] a = {
-                this.x, this.y
-        };
-
+        int[] a = { this.x, this.y };
         return a;
     }
 

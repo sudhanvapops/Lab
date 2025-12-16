@@ -14,13 +14,11 @@ public class Exp {
 
     public static void main(String[] args) {
         try {
-            int result = divide(10, 10);
+            int result = divide(10, 0);
             System.out.println("Result: " + result);
-        } 
-        catch (DivisionByZeroException e) {
+        } catch (DivisionByZeroException e) {
             System.out.println("Exception caught: " + e.getMessage());
-        } 
-        finally {
+        } finally {
             System.out.println("Finally block executed.");
         }
     }
