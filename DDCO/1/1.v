@@ -13,7 +13,7 @@ module expression(B,C,D,E);
 endmodule  
 
 module expression_tb(); 
-    // Inputs must be reg
+    // Inputs must be reg 
     // output must be wire
     reg B,C,D; 
     wire E; 

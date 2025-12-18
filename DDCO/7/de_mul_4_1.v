@@ -17,6 +17,9 @@ module Demux4to1_TB();
     Demux4to1 DEMUX(I, S0, S1, Y0, Y1, Y2, Y3);
 
     initial begin
+        $dumpfile("demux.vcd");     // output waveform file
+        $dumpvars(0, Demux4to1_TB); // dump all signals in testbench
+
         $monitor("Time=%0t  S1=%b S0=%b  I=%b  |  Y0=%b Y1=%b Y2=%b Y3=%b",
                   $time, S1, S0, I, Y0, Y1, Y2, Y3);
 
@@ -28,3 +31,4 @@ module Demux4to1_TB();
         $finish;
     end
 endmodule
+
