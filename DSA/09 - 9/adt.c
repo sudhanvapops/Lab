@@ -212,3 +212,35 @@ int main() {
 // 4 3 2 2 5 1
 // 5 3 3 2 4 1
 // 3 1 4 2 5 4
+
+
+// ! Output 
+
+// ---------------- MENU ---------------
+// Polynomial Operations :  
+// 1.Add
+// 2.Evaluate
+// 3.Exit
+// -------------------------------------
+
+// Enter your choice: 1
+// Enter no of terms of polynomial: 3
+// Enter coef & expo: 
+// 4 3 2 2 5 1
+// The polynomial is: 4x^3 + 2x^2 + 5x^1
+// Enter no of terms of polynomial: 3
+// Enter coef & expo: 
+// 5 3 3 2 4 1
+// The polynomial is: 5x^3 + 3x^2 + 4x^1
+// Addition of polynomial The polynomial is: 9x^3 + 5x^2 + 9x^1
+
+// Enter your choice: 2
+// Enter no of terms of polynomial: 3
+// Enter coef & expo: 
+// 3 1 4 2 5 4
+// The polynomial is: 3x^1 + 4x^2 + 5x^4
+// Enter the value of x: 2
+// Value of polynomial: 102
+
+// Enter your choice: 3
+// exit
