@@ -21,7 +21,7 @@ typedef struct {
 
 int main() {
     int n; float avgWT = 0, avgTAT = 0;
-    Process p[10], t;
+    Process p[10],t;
 
     printf("Enter number of processes: ");
     scanf("%d", &n);
@@ -35,7 +35,11 @@ int main() {
     // Sort by priority (ascending)
     for (int i = 0; i < n - 1; i++)
         for (int j = i + 1; j < n; j++)
-            if (p[i].pr > p[j].pr) { t = p[i]; p[i] = p[j]; p[j] = t; }
+            if (p[i].pr > p[j].pr) { 
+                t = p[i]; 
+                p[i] = p[j]; 
+                p[j] = t; 
+            }
 
     // Calculate WT & TAT
     p[0].wt = 0; 
