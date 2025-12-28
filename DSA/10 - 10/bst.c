@@ -85,21 +85,44 @@ void postorder(NODE *root) {
     printf("%d ", root->data);
 }
 
+/* -------- SEARCH WITH PARENT -------- */
+
+void searchWithParent(NODE *root, int key) {
+    NODE *parent = NULL;
+    NODE *curr = root;
+
+    while (curr != NULL) {
+        if (curr->data == key) {
+            printf("The %d Element is Present\n", key);
+            if (parent != NULL)
+                printf("Parent of node %d is %d\n", key, parent->data);
+            else
+                printf("Node %d is the root (no parent)\n", key);
+            return;
+        }
+
+        parent = curr;
+        curr = (key < curr->data) ? curr->left : curr->right;
+    }
+
+    printf("Element %d not found\n", key);
+}
+
 void menu() {
     printf("\n1.Insert");
     printf("\n2.Search");
     printf("\n3.Delete");
     printf("\n4.Traversal");
     printf("\n5.Exit");
-    printf("\nEnter choice: ");
 }
 
 int main() {
     NODE *root = NULL;
     int ch, data, n;
 
+    menu();
     while (1) {
-        menu();
+        printf("\nEnter choice: ");
         scanf("%d", &ch);
 
         switch (ch) {
@@ -116,16 +139,12 @@ int main() {
         case 2:
             printf("Enter element to search: ");
             scanf("%d", &data);
-            if (search(root, data))
-                printf("Element %d found\n", data);
-            else
-                printf("Element %d not found\n",data);
+            searchWithParent(root, data);
             break;
 
         case 3:
             printf("Enter element to delete: ");
             scanf("%d", &data);
-
             if (search(root, data)) {
                 root = deleteNode(root, data);
                 printf("Element %d deleted successfully\n", data);
@@ -142,6 +161,7 @@ int main() {
             printf("\nPostorder: ");
             postorder(root);
             break;
+
         case 5:
             exit(0);
 
