@@ -6,18 +6,16 @@
 int main() {
     int fd;
     char msg[100];
-    
-    if (mkfifo("myfifo", 0666) == -1) {
-        perror("mkfifo failed");
-    }
+
+    mkfifo("myfifo",0666);
 
     printf("Enter message: ");
-    fgets(msg, sizeof(msg), stdin);
+    fgets(msg,sizeof(msg),stdin);
 
-    fd = open("myfifo", O_WRONLY);
+    fd = open("myfifo",O_WRONLY);
     write(fd, msg, sizeof(msg));
     close(fd);
+    printf("Message sent.\n");
 
-    printf("✅ Message sent.\n");
     return 0;
 }

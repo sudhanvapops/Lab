@@ -8,7 +8,9 @@
 int main() {
     int fd;
     char msg[100];
-    mkfifo("myfifo", 0666);
+    if (mkfifo("myfifo", 0666) == -1) {
+        perror("mkfifo failed");
+    }
 
     fd = open("myfifo", O_RDONLY);
     read(fd, msg, sizeof(msg));
