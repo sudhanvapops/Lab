@@ -6,11 +6,10 @@ int blockSize[MAX], processSize[MAX], allocation[MAX];
 int nb, np;
 
 void readBlocks() {
-    int i;
     printf("Enter number of memory blocks: ");
     scanf("%d", &nb);
 
-    for (i = 0; i < nb; i++) {
+    for (int i = 0; i < nb; i++) {
         printf("Block %d: ", i + 1);
         scanf("%d", &blockSize[i]);
     }
@@ -31,45 +30,40 @@ void readProcesses() {
 
 
 void allocateMemory(int type) {
-    int i, j;
 
-    for (i = 0; i < np; i++) {
-        int idx = -1;
+    for (int i = 0; i < np; i++) {
 
-        for (j = 0; j < nb; j++) {
-            if (blockSize[j] >= processSize[i]) {
+        int blockIndx = -1; // blockIndx stores the selected block index
 
-                if (type == 1) { // First Fit
-                    idx = j;
-                    break;
-                }
+        for (int j = 0; j < nb; j++) {
 
-                if (type == 2) { // Best Fit
-                    if (idx == -1 || blockSize[j] < blockSize[idx])
-                        idx = j;
-                }
+            // Only blocks that can fit the process are considered.
+            if (blockSize[j] < processSize[i]) continue;
 
-                if (type == 3) { // Worst Fit
-                    if (idx == -1 || blockSize[j] > blockSize[idx])
-                        idx = j;
-                }
+            if (
+                blockIndx == -1 ||
+                (type == 2 && blockSize[j] < blockSize[blockIndx]) ||
+                (type == 3 && blockSize[j] > blockSize[blockIndx])
+            ) {
+                blockIndx = j;
             }
+
+            if (type == 1 && blockIndx != -1) break;
         }
 
-        if (idx != -1) {
-            allocation[i] = idx;
-            blockSize[idx] -= processSize[i];
+        if (blockIndx != -1) {
+            allocation[i] = blockIndx;
+            blockSize[blockIndx] -= processSize[i];
         }
     }
 }
 
 
 void displayResult(char *title) {
-    int i;
     printf("\n--- %s Allocation ---\n", title);
     printf("\nProcess No.\tProcess Size\tBlock No.\n");
 
-    for (i = 0; i < np; i++) {
+    for (int i = 0; i < np; i++) {
         printf("%d\t\t%d\t\t", i + 1, processSize[i]);
         if (allocation[i] != -1)
             printf("%d\n", allocation[i] + 1);
@@ -77,6 +71,7 @@ void displayResult(char *title) {
             printf("Not Allocated\n");
     }
 }
+
 
 int main() {
     int choice;

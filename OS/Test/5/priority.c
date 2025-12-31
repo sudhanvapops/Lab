@@ -39,7 +39,7 @@ int main(){
         p[i].tat = p[i].wt + p[i].bt;
     }
 
-     printf("\nPID\tBT\tPR\tWT\tTAT\n");
+    printf("\nPID\tBT\tPR\tWT\tTAT\n");
     for (int i = 0; i < n; i++) {
         printf("P%d\t%d\t%d\t%d\t%d\n", p[i].pid, p[i].bt, p[i].pr, p[i].wt, p[i].tat);
         avgWT += p[i].wt; avgTAT += p[i].tat;

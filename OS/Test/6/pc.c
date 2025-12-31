@@ -6,8 +6,8 @@ int full=0, empty=3;
 int x = 0;
 
 
-int wait(int *s) {(*s)--;}
-int signal(int *s) {(*s)++;}
+int wait(int *s) {(*s)--;} // Request The Resource --
+int signal(int *s) {(*s)++;} // Release the resourse ++
 
 void producer(){
     wait(&mutex);

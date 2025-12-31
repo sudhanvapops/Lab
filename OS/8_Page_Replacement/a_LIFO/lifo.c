@@ -24,8 +24,8 @@
 // Page 2 -> 1 2 -
 // Page 3 -> 1 2 3
 // Page 1 -> 1 2 3
-// Page 4 -> 4 2 3
-// Page 5 -> 4 5 3
+// Page 4 -> 1 4 3
+// Page 5 -> 1 4 5
 
 // Total Page Faults (LRU): 5
 

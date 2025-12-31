@@ -20,6 +20,7 @@ void readAvailable(int available[MAX]){
         scanf("%d",&available[i]);
 }
 
+/* Need = Max - Allocation */
 void calaculateNeed(){
     for (int i=0; i<n; i++){
         for(int j=0;j<m;j++){
@@ -97,3 +98,19 @@ int main(){
 
     return 0;
 }
+
+// ! Output
+// Enter number of processes: 5
+// Enter number of resources: 3
+// 
+// Enter Allocation Matrix:
+// 0 1 0 2 0 0 3 0 2 2 1 1 0 0 2 
+// 
+// Enter Maximum Matrix:
+// 7 5 3 3 2 2 9 0 2 4 2 2 5 3 3
+// 
+// Enter Available Resources:
+// 3 3 2
+// 
+// System is in SAFE state.
+// Safe Sequence is: P1 P3 P4 P0 P2

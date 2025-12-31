@@ -39,7 +39,7 @@ int main() {
             free = 0;
         else
             for (int i = start; i < start + len; i++)
-                if (blocks[i]) {
+                if (blocks[i]==1) {
                     free = 0;
                     break;
                 }
