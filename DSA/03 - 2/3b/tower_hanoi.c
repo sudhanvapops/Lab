@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <math.h>   // for pow()
+#include <math.h>   
 
 void tower(int n, char src, char temp, char dest) {
     if (n == 0)

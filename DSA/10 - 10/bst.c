@@ -28,9 +28,7 @@ NODE* search(NODE *root, int data) {
     if (!root || root->data == data)
         return root;
 
-    return (data < root->data) ?
-            search(root->left, data) :
-            search(root->right, data);
+    return (data < root->data) ? search(root->left, data) : search(root->right, data);
 }
 
 NODE* findMin(NODE *root) {
@@ -63,6 +61,8 @@ NODE* deleteNode(NODE *root, int data) {
     }
     return root;
 }
+
+// Traversal
 
 void inorder(NODE *root) {
     if (!root) return;

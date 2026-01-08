@@ -1,17 +1,50 @@
 #include<stdio.h>
 
-int main(){
+typedef struct node {
+    int data;
+    struct node *prev;
+    struct node *next;
+} node;
 
-    typedef struct {
-        int data;
-        struct Node *next;
-    } Node;
 
-    Node itm1,itm2;
-    itm1.data = 0;
-    itm2.data = 1;
-    itm1.next = &itm2;
-    
+node* insert_begin( node *head, int item) {
+    node *newnode;
 
-    return 0;
+    newnode = (node*)malloc(sizeof(node));
+    newnode->data = item;
+    newnode->prev = NULL;
+    newnode->next = head;
+
+    if (head != NULL)
+        head->prev = newnode;
+
+    head = newnode;
+    return head;
+}
+
+
+node* delete_end(node *head) {
+    node *temp;
+
+    if (head == NULL) {
+        printf("List is empty\n");
+        return head;
+    }
+
+    temp = head;
+
+    /* If only one node */
+    if (temp->next == NULL) {
+        free(temp);
+        return NULL;
+    }
+
+    /* Traverse to last node */
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->prev->next = NULL;
+    free(temp);
+
+    return head;
 }
