@@ -2,7 +2,7 @@
 
 int main() {
     char str[100], pat[100], rep[100], ans[200];
-    int i = 0, j = 0, k, match;
+    int i = 0, j = 0, k, found = 0, match;
 
     printf("Enter main string: ");
     fgets(str, 100, stdin);
@@ -25,6 +25,8 @@ int main() {
         }
 
         if (match) {
+            found = 1;
+
             // copy replace string
             for (k = 0; rep[k] != '\n' && rep[k] != '\0'; k++)
                 ans[j++] = rep[k];
@@ -36,7 +38,13 @@ int main() {
     }
 
     ans[j] = '\0';
-    printf("Result: %s", ans);
 
+    if (!found) {
+        printf("\nPattern not found.\n");
+        printf("Original string: %s", str);
+        return 0;
+    }
+
+    printf("\nResult: %s", ans);
     return 0;
 }
