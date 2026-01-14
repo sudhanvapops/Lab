@@ -11,6 +11,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+int count = 0;
+
 typedef struct {
     char ssn[15], name[20], dept[5], desig[10];
     float sal;
@@ -22,7 +25,6 @@ struct Enode {
     struct Enode *left, *right;
 } *head = NULL, *tail = NULL;
 
-int count = 0;
 
 struct Enode* newNode(EmpData e) {
     struct Enode *node = malloc(sizeof(struct Enode));

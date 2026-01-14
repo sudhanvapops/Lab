@@ -41,7 +41,7 @@ int precedence(char op) {
 
 void infixToPostfix(char infix[], char postfix[]) {
     int i = 0, k = 0;
-    char ch, elem;
+    char ch;
     push('#'); // Sentinel to mark bottom of stack
 
     while ((ch = infix[i++]) != '\0') {
