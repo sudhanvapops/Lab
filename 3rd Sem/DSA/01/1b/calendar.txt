@@ -1,0 +1,14 @@
+1
+Read
+2
+Sleep
+3
+Get up
+4
+GYM
+5
+work
+6
+Nothing
+7
+Rest
