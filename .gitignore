@@ -15,3 +15,70 @@
 /build/
 /bin/
 /dist/
+
+
+# Compiled files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+
+# Intermediate files
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+
+# Bibliography files
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Index files
+*.idx
+*.ilg
+*.ind
+
+# Glossary files
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.acn
+*.acr
+*.alg
+
+# TikZ / PGF
+*.dpth
+*.md5
+
+# Latexmk
+*.latexmk
+
+# PDF output (optional)
+*.pdf
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+*.swp
+*~
+
+# MacOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Build folders
+build/
+out/
