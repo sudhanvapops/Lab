@@ -1,0 +1,16 @@
+% Develop a LaTeX script to include the side-by-side 
+% graphics/pictures/figures in the document by using the subgraph concept.
+
+\documentclass{article}
+\usepackage{graphicx} % For including graphics
+\usepackage{subfigure} % For subfigures
+\begin{document}
+    \begin{figure}[htbp]
+        \centering
+        \subfigure[Subfigure A]{\includegraphics[width=0.45\textwidth]{example-image-a}}
+        \hfill
+        \subfigure[Subfigure B]{\includegraphics[width=0.45\textwidth]{example-image-b}}
+        \caption{Side-by-side subfigures}
+        \label{fig:side_by_side}
+    \end{figure}
+\end{document}

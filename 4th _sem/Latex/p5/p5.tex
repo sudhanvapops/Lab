@@ -1,3 +1,11 @@
+% Develop a LaTeX script to create a document that contains the following table with proper
+% labels.
+% SL NO USN Student Name Marks
+% Subject 1 Subject 2 Subject 3
+% 1 4XX22XX001 Name 1 89 60 90
+% 2 4XX22XX002 Name 2 78 45 98
+% 3 4XX22XX003 Name 3 67 55 59
+
 \documentclass{article}
 \usepackage{multirow}
 
@@ -13,8 +21,7 @@
 \multirow{2}{*}{SL NO} & \multirow{2}{*}{USN} & 
 \multirow{2}{*}{Student Name} & \multicolumn{3}{c|}{Marks} \\
 
-\cline{4-6}
- & & & Subject 1 & Subject 2 & Subject 3 \\
+\cline{4-6} & & & Subject 1 & Subject 2 & Subject 3 \\
 
 \hline
 1 & 4XX22XX001 & Name 1 & 89 & 60 & 90 \\

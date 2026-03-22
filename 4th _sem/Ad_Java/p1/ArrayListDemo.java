@@ -1,7 +1,15 @@
+// Implement a java program to demonstrate creating an ArrayList, adding elements, removing elements,
+// sorting elements of ArrayList. Also illustrate the use of toArray() method.
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ArrayListDemo {
+
+    public static void print(String s){
+        System.out.println(s);
+    }
+
     public static void main(String[] args) {
 
         // Creating an ArrayList
@@ -13,25 +21,25 @@ public class ArrayListDemo {
         list.add("Mango");
         list.add("Orange");
 
-        System.out.println("Original List:");
-        System.out.println(list);
+        print("Original List:");
+        print(""+list);
 
         // Removing an element
         list.remove("Mango");   // remove by value
-        System.out.println("\nAfter Removing 'Mango':");
-        System.out.println(list);
+        print("\nAfter Removing 'Mango':");
+        print(""+list);
 
         // Sorting elements
         Collections.sort(list);
-        System.out.println("\nAfter Sorting:");
-        System.out.println(list);
+        print("\nAfter Sorting:");
+        print(""+list);
 
         // Using toArray() method
         Object[] arr = list.toArray();
 
-        System.out.println("\nArray elements using toArray():");
+        print("\nArray elements using toArray():");
         for (Object obj : arr) {
-            System.out.println(obj);
+            print(""+obj);
         }
     }
 }

@@ -1,0 +1,19 @@
+% Develop a LaTeX script to create a simple document that consists of 2 sections [Section1, Section2], and a paragraph with dummy text in each section. And also include header [title of document] and footer [institute name, page number] in the document.
+
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum} % for dummy text
+
+\pagestyle{fancy}
+
+\fancyhf{} % Clear header and footer
+\fancyhead[R]{Latex Programming} % Right header
+\fancyfoot[R]{\thepage} % Right header
+\fancyfoot[L]{VVIET, Mysore} % Left footer
+
+\begin{document}
+\section{Section 1}
+\lipsum[1]
+\section{Section 2}
+\lipsum[1]
+\end{document}

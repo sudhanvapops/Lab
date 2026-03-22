@@ -1,9 +1,14 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
+// Develop a program to read random numbers between a given range that are multiples of 2 and 5, sort
+// the numbers according to tens place using comparator. 
+
+import java.util.*;
 
 public class TensPlaceSortExample {
+
+
+    public static void print(String s){
+        System.out.println(s);
+    }
 
     public static void main(String[] args) {
 
@@ -20,13 +25,12 @@ public class TensPlaceSortExample {
             int num = r.nextInt(end - start + 1) + start;
 
             // Check if number is multiple of 2 and 5
-            if (num % 2 == 0 && num % 5 == 0) {
+            if (num % 2 == 0 && num % 5 == 0) 
                 list.add(num);
-            }
         }
 
-        System.out.println("Multiples of 2 and 5:");
-        System.out.println(list);
+        print("Multiples of 2 and 5:");
+        print(""+list);
 
         // Sort based on tens place using Comparator
         Collections.sort(list, new Comparator<Integer>() {
@@ -39,8 +43,8 @@ public class TensPlaceSortExample {
             }
         });
 
-        System.out.println("After Sorting by Tens Place:");
-        System.out.println(list);
+        print("After Sorting by Tens Place:");
+        print(""+list);
     }
 } 
 
