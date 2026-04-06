@@ -1,0 +1,51 @@
+% Develop a LaTeX script to demonstrate the presentation of Numbered theorems, definitions,
+% corollaries, and lemmas in the document
+
+\documentclass{article}
+
+\usepackage{amsthm} % For theorem environments
+\usepackage{amsmath} % For math formatting
+\usepackage{lipsum} % Dummy text (optional)
+
+% Define Theorem Styles
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\title{Presentation of Theorems, Definitions, Corollaries, and Lemmas}
+\author{Sudhanva S}
+\date{\today}
+\maketitle
+
+\section{Theorems and Definitions}
+
+\begin{theorem}
+If \( a^2 + b^2 = c^2 \), then \( (a, b, c) \) is a Pythagorean triplet.
+\end{theorem}
+
+\begin{proof}
+Using the Pythagorean theorem, we can verify that for values such as \( (3, 4, 5) \), the equation holds: \[ 3^2 + 4^2 = 9 + 16 = 25 = 5^2 \]
+Thus, the statement is proven.
+\end{proof}
+
+\begin{definition}
+A \textbf{prime number} is a natural number greater than \(1\) that has no divisors other than \(1\) and itself.
+\end{definition}
+
+\begin{example}
+The numbers \(2, 3, 5, 7\) are prime numbers, while \(4\) and \(6\) are not because they have additional divisors.
+\end{example}
+
+\begin{corollary}
+If \( p \) is a prime number and divides \( ab \), then \( p \) must divide either \( a \) or \( b \).
+\end{corollary}
+
+\begin{lemma}
+If \( n \) is an even integer, then \( n^2 \) is also even.
+\end{lemma}
+
+\end{document}

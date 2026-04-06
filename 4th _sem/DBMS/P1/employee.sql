@@ -1,4 +1,6 @@
 -- Active: 1774368305703@@127.0.0.1@3306@lab
+-- ! Sudhanva S
+
 -- 1 Create a table called Employee & execute the following.
 -- Employee(EMPNO,ENAME,JOB, MANAGER_NO, SAL, COMMISSION)
 -- 1. Create a user and grant all permissions to theuser.
@@ -18,10 +20,10 @@ CREATE TABLE Employee (
 );
 
 -- Create User & Grant Permissions
-CREATE USER 'emp_user' IDENTIFIED BY 'password123';
+CREATE USER 'emp_user'@'localhost' IDENTIFIED BY 'password123';
 
 -- *.* = all databases + all tables
-GRANT ALL PRIVILEGES ON *.* TO 'emp_user';
+GRANT ALL PRIVILEGES ON *.* TO 'emp_user'@'localhost';
 
 
 -- Insert Records + Roll Back
@@ -52,3 +54,5 @@ INSERT INTO Employee VALUES (105, 'David', 'Clerk', NULL, 20000, NULL);
 
 
 SELECT * FROM Employee;
+
+FLUSH PRIVILEGES;

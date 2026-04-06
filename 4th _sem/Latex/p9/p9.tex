@@ -1,0 +1,36 @@
+% Develop a LaTeX script to create a document that consists of two paragraphs with a minimum of 10
+% citations in it and display the reference in the sectio
+
+\documentclass{article}
+
+\usepackage{lipsum}   % Dummy text
+\usepackage{cite}     % Improves citation formatting (e.g., [1-4])
+
+\begin{document}
+
+\section{Introduction}
+
+\lipsum[1]
+
+This is the first paragraph with citations~\cite{citation1, citation2, citation3, citation4}.
+
+\lipsum[2]~\cite{citation5}
+
+This is the second paragraph with more citations~\cite{citation6, citation7, citation8, citation9, citation10}.
+
+\begin{thebibliography}{99}
+
+\bibitem{citation1} Author1. \textit{Title1}. Journal1, Year1.
+\bibitem{citation2} Author2. \textit{Title2}. Journal2, Year2.
+\bibitem{citation3} Author3. \textit{Title3}. Journal3, Year3.
+\bibitem{citation4} Author4. \textit{Title4}. Journal4, Year4.
+\bibitem{citation5} Author5. \textit{Title5}. Journal5, Year5.
+\bibitem{citation6} Author6. \textit{Title6}. Journal6, Year6.
+\bibitem{citation7} Author7. \textit{Title7}. Journal7, Year7.
+\bibitem{citation8} Author8. \textit{Title8}. Journal8, Year8.
+\bibitem{citation9} Author9. \textit{Title9}. Journal9, Year9.
+\bibitem{citation10} Author10. \textit{Title10}. Journal10, Year10.
+
+\end{thebibliography}
+
+\end{document}
