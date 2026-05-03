@@ -69,9 +69,6 @@ double measureTime(int n) {
 int main() {
     int n;
 
-    srand(time(NULL));   // random seed
-
-    printf("***** MERGE SORT *****\n");
     printf("Enter Max array size: ");
     scanf("%d", &n);
 

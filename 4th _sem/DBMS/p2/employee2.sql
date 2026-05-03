@@ -1,5 +1,7 @@
 -- Active: 1774368305703@@127.0.0.1@3306@lab
 
+-- Program 2
+
 -- Create a table called Employee that contain attributes EMPNO,ENAME,JOB, MGR,SAL &
 -- execute the following.
 -- 1. Add a column commission with domain to the Employeetable.

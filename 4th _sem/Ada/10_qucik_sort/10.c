@@ -67,17 +67,14 @@ double measureTime(int n) {
 int main() {
     int n;
 
-    printf("***** QUICK SORT *****\n");
     printf("Enter Max array size: ");
     scanf("%d", &n);
 
-    generateArray(n);              // DRY
+    generateArray(n);
     printArray(n, "Input Array:");
-
     double time_taken = measureTime(n);   // DRY
 
     printArray(n, "Sorted Array:");
-
     printf("\nTime taken for n=%d is: %.6f ms\n", n, time_taken);
 
     return 0;
