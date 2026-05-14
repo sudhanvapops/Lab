@@ -1,0 +1,27 @@
+% Develop a Latex Script to present an algorithm in the document using algorithm/algorithmic/
+% algorithm2e library.
+
+
+\documentclass{article}
+
+% Package for algorithms
+\usepackage{algorithm2e}
+
+\begin{document}
+
+\begin{algorithm}
+\caption{Algorithm to Find Whether a Number is Even or Odd}
+\label{alg:evenodd}
+
+\KwData{An integer $n$, $n \geq 0$}
+\KwResult{Display whether $n$ is Even or Odd}
+
+\If{$n \bmod 2 = 0$} {
+    Print ``Even''\;
+} \Else {
+    Print ``Odd''\;
+}
+
+\end{algorithm}
+
+\end{document}

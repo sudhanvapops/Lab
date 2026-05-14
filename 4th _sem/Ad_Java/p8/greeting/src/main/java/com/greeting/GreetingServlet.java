@@ -1,3 +1,5 @@
+// 8. A program to display greeting message on the browser “Hello UserName”, “How Are You?”, accept  username from the client using servlet.
+
 package com.greeting;
 
 
@@ -28,13 +30,7 @@ public class GreetingServlet extends HttpServlet {
             name = "Guest";
         }
 
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head><title>Greeting</title></head>");
-        out.println("<body>");
-        out.println("<h2>Hello " + name + ", How Are You?</h2>");
-        out.println("</body>");
-        out.println("</html>");
+        out.println("<!DOCTYPE html>"+"\n<html>"+"\n<head><title>Greeting</title></head>"+"\n<body>"+"\n<h2>Hello " + name + ", How Are You?</h2>"+"\n</body>"+"\n</html>");
 
         out.close();
     }

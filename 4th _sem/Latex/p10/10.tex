@@ -1,0 +1,21 @@
+% Develop a LaTeX script to design a simple tree diagram or hierarchical structure in the document with appropriate labels using the Tikz library
+
+\documentclass{article}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=2.5cm},
+    every node/.style={draw, circle, minimum size=1cm}
+    ]
+    \node {Root}
+    child {node {Child 1}
+    child {node {GC 1}}
+    child {node {GC 2}}
+    }
+    child {node {Child 2}
+    child {node {GC 3}}
+    child {node {GC 4}}
+    };
+    \end{tikzpicture}
+\end{document}

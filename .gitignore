@@ -15,6 +15,7 @@
 /build/
 /bin/
 /dist/
+/target
 
 
 # Compiled files
