@@ -1,45 +1,60 @@
-// 7. Design and implement C/C++ Program to solve discrete Knapsack and continuous Knapsack
-// problems using greedy approximation method.
-
 #include <stdio.h>
 
 #define MAX 20
 
 typedef struct {
-    float w, p, r;
+    float p, w, r;
 } Item;
 
 int n;
 float M;
 
-/* ---------- Utility Functions ---------- */
+/* ---------- Input ---------- */
 
-void inputArray(float arr[], const char *msg) {
-    printf("%s", msg);
-    for (int i = 0; i < n; i++)
-        scanf("%f", &arr[i]);
+void readInput(Item obj[]) {
+    printf("Enter number of items: ");
+    scanf("%d", &n);
+
+    printf("Enter capacity: ");
+    scanf("%f", &M);
+
+    printf("\nEnter each item (Profit Weight)\n");
+    for (int i = 0; i < n; i++) {
+        printf("Item %d: ", i + 1);
+        scanf("%f %f", &obj[i].p, &obj[i].w);
+    }
 }
 
+
+/* ---------- Ratio ---------- */
+
+// Ratio = Profit / weight
 void computeRatio(Item a[]) {
     for (int i = 0; i < n; i++)
         a[i].r = a[i].p / a[i].w;
 }
 
+/* ---------- Sort ---------- */
+
 void sortByRatio(Item a[]) {
     Item temp;
-    for (int i = 0; i < n - 1; i++)
-        for (int j = 0; j < n - i - 1; j++)
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
             if (a[j].r < a[j + 1].r) {
                 temp = a[j];
                 a[j] = a[j + 1];
                 a[j + 1] = temp;
             }
+        }
+    }
 }
 
-/* ---------- Core Logic ---------- */
+/* ---------- Fractional Knapsack ---------- */
 
 float knapsack(Item a[], float x[]) {
-    float profit = 0, rc = M;
+    float profit = 0;
+    float rc = M;
 
     for (int i = 0; i < n; i++) {
         if (a[i].w <= rc) {
@@ -52,15 +67,23 @@ float knapsack(Item a[], float x[]) {
             break;
         }
     }
+
     return profit;
 }
 
-/* ---------- Display ---------- */
+/* ---------- Output ---------- */
 
 void display(Item a[], float x[], float profit) {
-    printf("\nWeight\tProfit\tFraction\n");
-    for (int i = 0; i < n; i++)
-        printf("%.2f\t%.2f\t%.2f\n", a[i].w, a[i].p, x[i]);
+
+    printf("\nProfit\tWeight\tRatio\tFraction\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("%.2f\t%.2f\t%.2f\t%.2f\n",
+               a[i].p,
+               a[i].w,
+               a[i].r,
+               x[i]);
+    }
 
     printf("\nTotal Profit = %.2f\n", profit);
 }
@@ -68,25 +91,34 @@ void display(Item a[], float x[], float profit) {
 /* ---------- Main ---------- */
 
 int main() {
-    printf("***** FRACTIONAL KNAPSACK *****\n");
-
-    printf("Enter number of objects: ");
-    scanf("%d", &n);
 
     Item obj[MAX];
     float x[MAX] = {0};
 
-    printf("Enter capacity: ");
-    scanf("%f", &M);
-
-    inputArray(&obj[0].w, "Enter Weights: ");
-    inputArray(&obj[0].p, "Enter Profits: ");
+    readInput(obj);
 
     computeRatio(obj);
     sortByRatio(obj);
 
     float profit = knapsack(obj, x);
+
     display(obj, x, profit);
 
     return 0;
 }
+
+
+// Enter number of items: 3
+// Enter capacity: 40
+// 
+// Enter each item (Profit Weight)
+// Item 1: 30 20
+// Item 2: 40 25
+// Item 3: 35 10
+// 
+// Profit  Weight  Ratio   Fraction
+// 35.00   10.00   3.50    1.00
+// 40.00   25.00   1.60    1.00
+// 30.00   20.00   1.50    0.25
+// 
+// Total Profit = 82.50

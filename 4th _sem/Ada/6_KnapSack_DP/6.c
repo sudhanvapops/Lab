@@ -12,8 +12,9 @@ void readInput() {
     printf("Enter number of items: ");
     scanf("%d", &n);
 
+    printf("\nEnter in (Profit Weights)\n");
     for (int i = 1; i <= n; i++) {
-        printf("Item %d (profit weight): ", i);
+        printf("Item %d: ", i);
         scanf("%d %d", &p[i], &w[i]);
     }
 
@@ -73,11 +74,15 @@ int main() {
     return 0;
 }
 
+
+
 // Enter number of items: 4
-// Item 1 (profit weight): 12 2
-// Item 2 (profit weight): 10 1
-// Item 3 (profit weight): 20 3
-// Item 4 (profit weight): 15 2
+
+// Enter in (Profit Weights)
+// Item 1: 12 2
+// Item 2: 10 1
+// Item 3: 20 3
+// Item 4: 15 2
 // Enter capacity: 5
 
 // Items included:

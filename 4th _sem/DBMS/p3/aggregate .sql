@@ -7,8 +7,9 @@
 -- 1. Create Employee table containing all Records E_id, E_name, Age, Salary. 
 -- 2. Count number of employee names from employeetable 
 -- 3. Find the Maximum age from employee table. 
--- 4. Find the Minimum age from employeetable. 
--- 5. Find salaries of employee in Ascending Order. 6. Find grouped salaries of employees.
+-- 4. Find the Minimum age from employee table. 
+-- 5. Find salaries of employee in Ascending Order. 
+-- 6. Find grouped salaries of employees.
 
 
 -- 1. Create Employee table containing all Records E_id, E_name, Age, Salary.
@@ -60,3 +61,100 @@ ORDER BY Salary ASC;
 SELECT Salary, COUNT(*) AS Num_Employees
 FROM Employee3
 GROUP BY Salary;
+
+
+
+
+-- ! Output
+
+-- mysql> CREATE TABLE Employee3 (
+--     ->     E_id INT PRIMARY KEY,
+--     ->     E_name VARCHAR(50),
+--     ->     Age INT,
+--     ->     Salary DECIMAL(10,2)
+--     -> );
+-- Query OK, 0 rows affected (0.14 sec)
+
+
+-- mysql> INSERT INTO Employee3 VALUES
+-- (2, 'Ravi',(1, 'Amit', 25, 30000),
+--  30, 40000),
+-- (3,    -> (2, 'Ravi', 30, 40000),
+--     -> (3, 'Sneha', 28, 35000),
+--     -> (4, 'Kiran', 35, 50000),
+--     -> (5, 'Akash', 35, 50000);
+-- Query OK, 5 rows affected (0.03 sec)
+-- Records: 5  Duplicates: 0  Warnings: 0
+
+
+-- mysql> SELECT * FROM Employee3;
+-- +------+--------+------+----------+
+-- | E_id | E_name | Age  | Salary   |
+-- +------+--------+------+----------+
+-- |    1 | Amit   |   25 | 30000.00 |
+-- |    2 | Ravi   |   30 | 40000.00 |
+-- |    3 | Sneha  |   28 | 35000.00 |
+-- |    4 | Kiran  |   35 | 50000.00 |
+-- |    5 | Akash  |   35 | 50000.00 |
+-- +------+--------+------+----------+
+-- 5 rows in set (0.01 sec)
+
+
+-- mysql> SELECT COUNT(E_name) AS Total_Employees
+-- loyee3;    -> FROM Employee3;
+-- +-----------------+
+-- | Total_Employees |
+-- +-----------------+
+-- |               5 |
+-- +-----------------+
+-- 1 row in set (0.01 sec)
+
+
+-- mysql> SELECT MAX(Age) AS Max_Age
+--     -> FROM Employee3;
+-- +---------+
+-- | Max_Age |
+-- +---------+
+-- |      35 |
+-- +---------+
+-- 1 row in set (0.00 sec)
+
+
+-- mysql> SELECT MIN(Age) AS Max_Age
+--     -> FROM Employee3;
+-- +---------+
+-- | Max_Age |
+-- +---------+
+-- |      25 |
+-- +---------+
+-- 1 row in set (0.01 sec)
+
+
+-- mysql> SELECT E_name, Salary
+--     -> FROM Employee3
+--     -> ORDER BY Salary ASC;
+-- +--------+----------+
+-- | E_name | Salary   |
+-- +--------+----------+
+-- | Amit   | 30000.00 |
+-- | Sneha  | 35000.00 |
+-- | Ravi   | 40000.00 |
+-- | Kiran  | 50000.00 |
+-- | Akash  | 50000.00 |
+-- +--------+----------+
+-- 5 rows in set (0.00 sec)
+
+
+-- mysql> SELECT Salary, COUNT(*) AS Num_Employees
+-- ployee3
+-- GROUP BY Salary;    -> FROM Employee3
+--     -> GROUP BY Salary;
+-- +----------+---------------+
+-- | Salary   | Num_Employees |
+-- +----------+---------------+
+-- | 30000.00 |             1 |
+-- | 40000.00 |             1 |
+-- | 35000.00 |             1 |
+-- | 50000.00 |             2 |
+-- +----------+---------------+
+-- 4 rows in set (0.02 sec)

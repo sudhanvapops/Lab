@@ -57,7 +57,7 @@ void solveNQueens(int n) {
 int main() {
     int n;
 
-    printf("Enter the number of Queens\n");
+    printf("Enter the number of Queens: ");
     scanf("%d", &n);
 
     solveNQueens(n);

@@ -16,6 +16,10 @@ void readMatrix() {
 }
 
 void floyd() {
+    // Check every path from i to j using k as intermediate.
+    // k → intermediate node
+    // i → source
+    // j → destination
     for (int k = 0; k < n; k++)
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
@@ -33,7 +37,6 @@ void printMatrix() {
 }
 
 int main() {
-    printf("***** Floyd's Algorithm *****\n");
     readMatrix();
     floyd();
     printMatrix();
@@ -42,7 +45,6 @@ int main() {
 
 
 
-// *****FLOYD'S ALGORITHM*****
 // Enter the number of vertices
 // 4
 // Enter the cost matrix of the graph:					

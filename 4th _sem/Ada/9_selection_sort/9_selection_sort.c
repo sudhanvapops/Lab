@@ -7,49 +7,44 @@
 #include<stdlib.h>
 #include<time.h>
 
-/* ---------- Selection Sort ---------- */
-void selsort(int a[], int n)
-{
-    int small, pos, temp;
 
-    for(int i = 0; i < n - 1; i++)
-    {
+void selsort(int a[], int n) {
+    int small, pos;
+
+    for(int i = 0; i < n - 1; i++) {
         small = a[i];
         pos = i;
 
-        for(int j = i + 1; j < n; j++)
-        {
-            if(a[j] < small)
-            {
+        for(int j = i + 1; j < n; j++) {
+            if(a[j] < small) {
                 small = a[j];
                 pos = j;
             }
         }
 
-        temp = a[i];
+        int temp = a[i];
         a[i] = small;
         a[pos] = temp;
     }
 }
 
-/* ---------- Utility Functions (DRY) ---------- */
-void printArray(int a[], int n, const char *msg)
-{
+
+void printArray(int a[], int n, const char *msg) {
     printf("%s\n", msg);
     for(int i = 0; i < n; i++)
         printf("%d\t", a[i]);
     printf("\n");
 }
 
-void generateArray(int a[], int n)
-{
+
+void generateArray(int a[], int n) {
     for(int i = 0; i < n; i++)
         a[i] = 5000 + rand() % 999;
 }
 
-/* ---------- Main ---------- */
-void main()
-{
+
+void main() {
+
     int a[10], n;
     clock_t start, end;
     
@@ -59,7 +54,7 @@ void main()
 
     srand(time(NULL)); 
     
-    generateArray(a, n);   // DRY applied
+    generateArray(a, n);  
 
     printArray(a, n, "Input Array:");
 

@@ -10,7 +10,7 @@
     Name: ${name} <br><br>
     USN: ${usn} <br><br>
     Total Marks: ${total} <br><br>
-    Percentage: ${perc} <br><br>
+    Percentage: <%= String.format("%.2f", request.getAttribute("perc")) %><br><br>
 
     <a href="index.jsp">Go Back</a>
 

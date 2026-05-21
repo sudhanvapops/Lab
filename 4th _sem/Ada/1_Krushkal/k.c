@@ -5,25 +5,42 @@
 #define MAX 20
 #define INF 999
 
+// Cost: adj Matrix
+// parent: tracks connected component 
+// n: number of vertices
+// INF means edge removed
+
 int n, cost[MAX][MAX], parent[MAX];
 
+// Find which group(vertex set) a node belongs to, find in the set
+// Eg: parent[3] = 1; 3 belong to 1
 int find(int i) {
     while (parent[i])
         i = parent[i];
+    // When Parent[i] hit 0 means its the root, then i is the root
     return i;
 }
 
+
+// Unite the sets
+// before: 1  3, after parent[3]: 1, Means  3(root) ------ 1(child)
 void unite(int i, int j) {
     parent[j] = i;
 }
+
+
 
 int main() {
     int min, a, b, u, v;
     int edges = 1, mincost = 0;
 
+
+    // Input 
     printf("Enter number of vertices: ");
     scanf("%d", &n);
 
+
+    // Diagonal 0 and convert to INF: 999
     printf("Enter cost adjacency matrix:\n");
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
@@ -33,15 +50,22 @@ int main() {
         }
     }
 
+
+    // Calculate Min Spaning tree
     printf("\nEdges in Minimum Spanning Tree:\n");
 
+    // Edge = vertex - 1: Edge < n (vertex)
     while (edges < n) {
+
         min = INF;
 
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
                 if (cost[i][j] < min) {
                     min = cost[i][j];
+
+                    // a,b orignal copy: used for printing nd removing
+                    // u,v representative(parent/root) after find()
                     a = u = i;
                     b = v = j;
                 }

@@ -32,7 +32,6 @@ void printMatrix() {
 }
 
 int main() {
-    printf("***** Warshall's Algorithm *****\n");
     readMatrix();
     warshall();
     printMatrix();
@@ -41,7 +40,6 @@ int main() {
 
 
 
-// *****WARSHALL'S ALGORITHM*****
 // Enter the number of vertices
 // 4
 // Enter the adjacency matrix (1 if there is edge and 0 if there is no direct edge)		

@@ -10,74 +10,85 @@
 
 #define MAX 10005
 
-int a[MAX];
 
-/* ---------- Merge Function ---------- */
-void merge(int low, int mid, int high) {
-    int b[MAX];
-    int i = low, h = low, j = mid + 1;
+void merge(int a[], int low, int mid, int high) {
 
-    while (h <= mid && j <= high) {
-        if (a[h] < a[j])
-            b[i++] = a[h++];
+    int size = high - low + 1; // get length
+    int temp[size]; // write back array
+
+
+    int left = low;
+    int right = mid + 1;
+    int k = 0; // pointer for third array
+
+
+    while (left <= mid && right <= high) {
+
+        if (a[left] <= a[right])
+            temp[k++] = a[left++];
         else
-            b[i++] = a[j++];
+            temp[k++] = a[right++];
     }
 
-    while (h <= mid)
-        b[i++] = a[h++];
 
-    while (j <= high)
-        b[i++] = a[j++];
+    // remaing elements 
+    while (left <= mid)
+        temp[k++] = a[left++];
 
-    for (int k = low; k <= high; k++)
-        a[k] = b[k];
+    while (right <= high)
+        temp[k++] = a[right++];
+
+    // Right back to original array
+    for (int i = 0; i < size; i++)
+        a[low + i] = temp[i];
+
 }
 
-/* ---------- Merge Sort ---------- */
-void mergeSort(int low, int high) {
-    if (low < high) {
-        int mid = (low + high) / 2;
-        mergeSort(low, mid);
-        mergeSort(mid + 1, high);
-        merge(low, mid, high);
-    }
+
+void mergeSort(int a[], int low, int high) {
+    if (low >= high) return;
+    int mid = (low + high) / 2;
+    mergeSort(a,low, mid);
+    mergeSort(a,mid + 1, high);
+    merge(a, low, mid, high);
 }
 
-/* ---------- Utility (DRY) ---------- */
-void generateArray(int n) {
+
+void generateArray(int a[], int n) {
     for (int i = 0; i < n; i++)
         a[i] = 5000 + rand() % 999;
 }
 
-void printArray(int n, const char *msg) {
+
+void printArray(int a[], int n, const char *msg) {
     printf("%s\n", msg);
     for (int i = 0; i < n; i++)
         printf("%d\t", a[i]);
     printf("\n");
 }
 
-double measureTime(int n) {
-    clock_t start = clock();
-    mergeSort(0, n - 1);
-    clock_t end = clock();
 
+double measureTime(int a[], int n) {
+    clock_t start = clock();
+    mergeSort(a,0, n - 1);
+    clock_t end = clock();
     return ((double)(end - start)) / CLOCKS_PER_SEC * 1000;
 }
 
-/* ---------- Main ---------- */
+
 int main() {
     int n;
+    int a[MAX];
 
     printf("Enter Max array size: ");
     scanf("%d", &n);
 
-    generateArray(n);                // DRY
-    printArray(n, "Input Array:");
+    generateArray(a,n);                
+    printArray(a,n, "Input Array:");
 
-    double time_taken = measureTime(n);   // DRY
+    double time_taken = measureTime(a,n);
 
-    printArray(n, "Sorted Array (Merge Sort):");
+    printArray(a,n, "Sorted Array (Merge Sort):");
 
     printf("\nTime taken for n=%d is: %f ms\n", n, time_taken);
 

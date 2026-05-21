@@ -25,7 +25,7 @@ public class StudentDetails extends HttpServlet{
 
         int total = m1 + m2 + m3;
 
-        int perc = (total / 300)*100;
+        double perc = ((double) total / 300.0)*100;
 
         // Store data in request scope
         req.setAttribute("name", name);
