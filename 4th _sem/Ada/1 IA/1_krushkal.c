@@ -32,6 +32,7 @@ void input(int n, Edge edge[], int *m){
     printf("\n");
 }
 
+
 int parent[MAX];
 
 

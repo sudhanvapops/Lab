@@ -1,3 +1,7 @@
+// 7. Design and implement C/C++ Program to solve discrete Knapsack and continuous Knapsack
+// problems using greedy approximation method.
+
+
 #include <stdio.h>
 
 #define MAX 20
@@ -6,7 +10,7 @@ typedef struct {
     float p, w, r;
 } Item;
 
-int n;
+int n; 
 float M;
 
 /* ---------- Input ---------- */
