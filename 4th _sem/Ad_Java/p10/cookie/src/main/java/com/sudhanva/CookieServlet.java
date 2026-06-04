@@ -1,3 +1,5 @@
+// A Java program to create and read the cookie for the given cookie name as “EMPID” and its value as “AN2356”
+
 package com.sudhanva;
 
 import java.io.IOException;
