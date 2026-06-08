@@ -26,7 +26,7 @@ INSERT INTO Employee5 VALUES
 (2, 'Ravi', 30, 30000),
 (3, 'Sneha', 28, 25000);
 
-
+SELECT * from employee5
 
 -- Cursor Program
 DELIMITER $$

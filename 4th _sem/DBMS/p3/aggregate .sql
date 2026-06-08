@@ -45,7 +45,7 @@ FROM Employee3;
 
 
 -- 3. Find Maximum Age
-SELECT MIN(Age) AS Max_Age
+SELECT MIN(Age) AS Min_Age
 FROM Employee3;
 -- Output 25
 

@@ -1,67 +1,73 @@
-// 12. Design and implement C/C++ Program for N Queen's problem using Backtracking.
-
 #include <stdio.h>
-#include <stdlib.h>
 
-#define MAX 30
+int board[20][20];
+int n, count = 0;
 
-int a[MAX], count = 0;
+/* Check whether a queen can be placed */
+int isSafe(int row, int col) {
+    int i, j;
 
-/* ---------- Check Safe Placement ---------- */
-int isSafe(int pos) {
-    for (int i = 1; i < pos; i++) {
-        if (a[i] == a[pos] || abs(a[i] - a[pos]) == abs(i - pos))
+    // Check left side of same row
+    for(i = 0; i < col; i++)
+        if(board[row][i])
             return 0;
-    }
+
+    // Check upper-left diagonal
+    for(i = row, j = col; i >= 0 && j >= 0; i--, j--)
+        if(board[i][j])
+            return 0;
+
+    // Check lower-left diagonal
+    for(i = row, j = col; i < n && j >= 0; i++, j--)
+        if(board[i][j])
+            return 0;
+
     return 1;
 }
 
-/* ---------- Print Solution ---------- */
-void printSolution(int n) {
-    count++;
-    printf("\n\nSolution #%d:\n", count);
+/* Print solution */
+void printBoard() {
+    int i, j;
 
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            printf(a[i] == j ? "Q\t" : "*\t");
+    count++;
+    printf("\nSolution %d:\n", count);
+
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < n; j++) {
+            if(board[i][j])
+                printf("Q ");
+            else
+                printf("* ");
         }
         printf("\n");
     }
 }
 
-/* ---------- Backtracking Core ---------- */
-void solveNQueens(int n) {
-    int k = 1;
-    a[k] = 0;
+/* Backtracking function */
+void solve(int col) {
+    if(col == n) {
+        printBoard();
+        return;
+    }
 
-    while (k != 0) {
-        a[k]++;
+    for(int row = 0; row < n; row++) {
+        if(isSafe(row, col)) {
+            board[row][col] = 1;   // Place queen
 
-        while (a[k] <= n && !isSafe(k))
-            a[k]++;
+            solve(col + 1);        // Recur
 
-        if (a[k] <= n) {
-            if (k == n)
-                printSolution(n);
-            else {
-                k++;
-                a[k] = 0;
-            }
-        } else {
-            k--;   // backtrack
+            board[row][col] = 0;   // Backtrack
         }
     }
 }
 
-/* ---------- Main ---------- */
 int main() {
-    int n;
-
-    printf("Enter the number of Queens: ");
+    printf("Enter number of queens: ");
     scanf("%d", &n);
 
-    solveNQueens(n);
+    solve(0);
 
-    printf("\nTotal solutions = %d\n", count);
+    printf("\nTotal Solutions = %d\n", count);
+
     return 0;
 }

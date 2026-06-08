@@ -17,6 +17,7 @@ void calculateIndegree() {
 
 // Perform Topological Sort
 void topologicalSort() {
+
     int stack[MAX], top = -1, result[MAX], k = 0;
 
     calculateIndegree();
@@ -27,6 +28,8 @@ void topologicalSort() {
             stack[++top] = i;
 
     while (top != -1) {
+
+        // 3. Pop a vertex
         int u = stack[top--];
         result[k++] = u;
 
